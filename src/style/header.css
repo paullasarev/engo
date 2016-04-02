@@ -1,0 +1,10 @@
+@import "variables.css";
+
+$color-bg: #75FFF9;
+$color-fg: white;
+
+.header {
+  background-color: $color-bg;
+  color:  $color-fg;
+  height: $header-height;
+}

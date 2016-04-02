@@ -2,6 +2,9 @@ var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
+var postcssModules = require('postcss-modules');
+var postcssSimpleVars = require('postcss-simple-vars');
+var postcssImport = require("postcss-import");
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -20,7 +23,10 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.html']
   },
   postcss: [
+    postcssImport,
+    postcssSimpleVars,
     autoprefixer,
+    // postcssModules,
   ],
   module: {
     loaders: [

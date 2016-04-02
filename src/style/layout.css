@@ -1,0 +1,22 @@
+@import "variables.css";
+
+$color-bg: #fbfbfb;
+
+body {
+  background-color:  $color-bg;
+}
+
+.page {
+  background-color:  $color-bg;
+  padding-top: $header-height;;
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+}
+
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+}

@@ -1,13 +1,23 @@
 require("../style/app.css");
-// require("../index.html");
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, Link, browserHistory } from 'react-router';
+import Layout from './layout';
+
+const routes = ( 
+      <Route path="/" component={Layout}>
+      </Route>
+    );
 
 export class App extends React.Component {
   render() {
+    
+  
     return (
-      <div>Hello, world!</div>
+      <Router history={browserHistory}>
+        {routes}
+      </Router>
     );
   }
 }
