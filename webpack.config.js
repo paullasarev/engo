@@ -5,6 +5,7 @@ var autoprefixer = require('autoprefixer');
 var postcssModules = require('postcss-modules');
 var postcssSimpleVars = require('postcss-simple-vars');
 var postcssImport = require("postcss-import");
+var postcssImageSizes = require('postcss-image-sizes')
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -26,7 +27,7 @@ module.exports = {
     postcssImport,
     postcssSimpleVars,
     autoprefixer,
-    // postcssModules,
+    // postcssImageSizes,
   ],
   module: {
     loaders: [
@@ -35,10 +36,6 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loaders: ['react-hot', 'babel'],
       },
-      // {
-      //   test: /\.css$/,
-      //   loader: 'style-loader!css-loader'
-      // },
       { 
         test: /\.css$/, 
         loader: ExtractTextPlugin.extract('style-loader', 
@@ -87,6 +84,8 @@ module.exports = {
     new ExtractTextPlugin('style/app.css', { allChunks: true }), 
     new CopyWebpackPlugin([
       { from: 'src/index.html' },
+      { from: 'src/img/mind-map-lila-16.png', to:'favicon.png' },
+      { from: 'src/img', to: './img' },
     ]),
   ]
 };

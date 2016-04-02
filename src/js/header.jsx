@@ -5,6 +5,7 @@ const Header = React.createClass({
   render() {
     return (
       <div className={styles.header}>
+        <div className={styles.logo}/>
         header
       </div>
     );

@@ -8,3 +8,17 @@ $color-fg: white;
   color:  $color-fg;
   height: $header-height;
 }
+
+.header .logo {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.logo {
+  display: inline-block;
+  background-image: url("../img/mind-map-lila-48.png");
+  background-size: 48px 48px;
+  height: 48px;
+  width: 48px;
+  // background-size: image-width("../img/mind-map-lila-48.png") image-height("../img/mind-map-lila-48.png");
+}
