@@ -3,11 +3,32 @@ var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 var postcssModules = require('postcss-modules');
-var postcssSimpleVars = require('postcss-simple-vars');
-var postcssImport = require("postcss-import");
-var postcssImageSizes = require('postcss-image-sizes')
+// var postcssSimpleVars = require('postcss-simple-vars');
+// var postcssImport = require("postcss-import");
+// var postcssImageSizes = require('postcss-image-sizes')
+var precss = require('precss');
+var postcssAssets  = require('postcss-assets');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
+var yargs = require('yargs').argv;
+
+var isDev = !!yargs.hot;
+console.log('isDev', isDev)
+
+const cssLoader = 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader';
+var plugins = [
+  new webpack.NoErrorsPlugin(),
+  new CleanWebpackPlugin(['build']),
+  new CopyWebpackPlugin([
+    { from: 'src/index.html' },
+    { from: 'src/img/mind-map-lila-16.png', to:'favicon.png' },
+    { from: 'src/img', to: './img' },
+  ]),
+];
+
+if (!isDev) {
+  plugins.push(new ExtractTextPlugin('style/app.css', { allChunks: true }));
+}  
 
 module.exports = {
   entry: [
@@ -24,8 +45,10 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.html']
   },
   postcss: [
-    postcssImport,
-    postcssSimpleVars,
+    // postcssImport,
+    // postcssSimpleVars,
+    precss,
+    postcssAssets,
     autoprefixer,
     // postcssImageSizes,
   ],
@@ -38,8 +61,7 @@ module.exports = {
       },
       { 
         test: /\.css$/, 
-        loader: ExtractTextPlugin.extract('style-loader', 
-          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
+        loader: isDev ? "style-loader!" + cssLoader : ExtractTextPlugin.extract('style-loader', cssLoader)
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
@@ -78,16 +100,7 @@ module.exports = {
     hot: true,
     inline: true,
   },
-  plugins: [
-    new webpack.NoErrorsPlugin(),
-    new CleanWebpackPlugin(['build']),
-    new ExtractTextPlugin('style/app.css', { allChunks: true }), 
-    new CopyWebpackPlugin([
-      { from: 'src/index.html' },
-      { from: 'src/img/mind-map-lila-16.png', to:'favicon.png' },
-      { from: 'src/img', to: './img' },
-    ]),
-  ]
+  plugins: plugins,
 };
 
 

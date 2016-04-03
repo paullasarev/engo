@@ -10,15 +10,61 @@ $color-fg: white;
 }
 
 .header .logo {
+  margin-top: 5px;
   margin-left: 10px;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .logo {
+  $img: "../img/mind-map-lila-48.png";
   display: inline-block;
-  background-image: url("../img/mind-map-lila-48.png");
-  background-size: 48px 48px;
-  height: 48px;
-  width: 48px;
+  vertical-align: top;
+  background-image: url($img);
+  background-size: size($img);
+  height: height($img);
+  width: width($img);
   // background-size: image-width("../img/mind-map-lila-48.png") image-height("../img/mind-map-lila-48.png");
+}
+
+.search {
+  $height: 40px ;
+  $buttonSize: 30px;
+
+  display: inline-block;
+  vertical-align: top;
+  width: 80%;
+  position: relative;
+  box-sizing: border-box;
+
+  height: $header-height;
+  line-height: $header-height;
+  
+  &Input {
+    display: inline;
+    height: $height;
+    width: 100%;
+    box-sizing: border-box;
+    vertical-align: 1px;
+
+    padding-right: calc($buttonSize + 5px + 6px);
+    padding-left: 5px;
+    font-size: 18px;
+    outline: none;
+  }
+  
+  &Button {
+    position: absolute;
+    right: 6px;
+    top: 15px;
+    box-sizing: border-box;
+
+    background-color: $color-bg;
+    border-radius: 5px; 
+    display: inline-block;
+    vertical-align: middle;
+    height: $buttonSize;
+    width: $buttonSize;
+
+    cursor: pointer;
+  }
 }
